@@ -1,0 +1,991 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Emma & James — Wedding</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #fbfaf7;          /* warm white */
+      --paper: #ffffff;       /* card */
+      --ink: #2b2b2b;         /* text */
+      --muted: #6b6b6b;
+      --sage: #7d9a8b;
+      --sage-2:#e7efe9;
+      --rose: #c88f95;        /* dusty rose accent */
+      --rose-2:#f3e6e8;
+      --line: rgba(43,43,43,.10);
+      --shadow: 0 20px 60px rgba(20, 20, 20, 0.08);
+      --radius: 18px;
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(900px 600px at 10% 10%, rgba(125,154,139,.12), transparent 55%),
+        radial-gradient(800px 500px at 90% 25%, rgba(200,143,149,.14), transparent 60%),
+        linear-gradient(180deg, var(--bg), #f8f6f1 70%, #f7f5ef);
+    }
+
+    a{ color:inherit; }
+    .container{
+      width:min(var(--max), calc(100% - 40px));
+      margin:0 auto;
+    }
+
+    /* Sticky header */
+    header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      backdrop-filter: blur(10px);
+      background: rgba(251,250,247,.78);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+    }
+    .brand{
+      display:flex;
+      align-items:baseline;
+      gap:10px;
+      white-space:nowrap;
+    }
+    .brand strong{
+      font-family: "Playfair Display", serif;
+      font-weight:700;
+      letter-spacing:.2px;
+      font-size:18px;
+    }
+    .brand span{
+      font-size:12px;
+      color:var(--muted);
+    }
+    nav ul{
+      list-style:none;
+      display:flex;
+      margin:0;
+      padding:0;
+      gap:18px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    nav a{
+      text-decoration:none;
+      font-size:13px;
+      color: rgba(43,43,43,.85);
+      padding:8px 10px;
+      border-radius:999px;
+      transition: background .2s ease, color .2s ease;
+    }
+    nav a:hover{
+      background: rgba(125,154,139,.14);
+      color: var(--ink);
+    }
+    .nav-cta{
+      border:1px solid rgba(200,143,149,.35);
+      background: rgba(200,143,149,.12);
+    }
+    .nav-cta:hover{
+      background: rgba(200,143,149,.18);
+    }
+
+    /* Sections */
+    section{ padding:72px 0; }
+    .section-title{
+      font-family:"Playfair Display", serif;
+      font-size:34px;
+      margin:0 0 16px;
+      letter-spacing:.2px;
+    }
+    .section-kicker{
+      color:var(--muted);
+      margin:0 0 28px;
+      max-width: 70ch;
+      line-height:1.6;
+    }
+
+    /* Fade-in on scroll */
+    .reveal{
+      opacity:0;
+      transform: translateY(16px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .reveal.is-visible{
+      opacity:1;
+      transform: translateY(0);
+    }
+
+    /* Hero */
+    .hero{
+      padding:84px 0 44px;
+      position:relative;
+    }
+    .hero-card{
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.84));
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 8px);
+      box-shadow: var(--shadow);
+      padding: 44px 28px;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(900px 280px at 15% 0%, rgba(125,154,139,.22), transparent 55%),
+        radial-gradient(800px 240px at 85% 10%, rgba(200,143,149,.22), transparent 55%);
+      pointer-events:none;
+      z-index:0;
+      filter: blur(0px);
+    }
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:28px;
+      align-items:center;
+    }
+    .hero h1{
+      font-family:"Playfair Display", serif;
+      font-size: clamp(44px, 6vw, 72px);
+      line-height:1.02;
+      margin:0 0 12px;
+    }
+    .hero .date{
+      font-size:16px;
+      color: rgba(43,43,43,.82);
+      margin: 0 0 18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border: 1px solid rgba(125,154,139,.35);
+      background: rgba(125,154,139,.10);
+      font-size:13px;
+      color: rgba(43,43,43,.85);
+    }
+    .pill.rose{
+      border-color: rgba(200,143,149,.38);
+      background: rgba(200,143,149,.10);
+    }
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+      max-width: 60ch;
+    }
+
+    .countdown{
+      background: rgba(255,255,255,.78);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding:18px;
+    }
+    .countdown h3{
+      margin:0 0 10px;
+      font-family:"Playfair Display", serif;
+      font-size:20px;
+    }
+    .timer{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+      margin-top: 10px;
+    }
+    .tbox{
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding:12px 10px;
+      background: linear-gradient(180deg, rgba(231,239,233,.65), rgba(243,230,232,.22));
+      text-align:center;
+    }
+    .tbox strong{
+      display:block;
+      font-size:28px;
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    .tbox span{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .timer-note{
+      margin:10px 0 0;
+      color: var(--muted);
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    /* Cards/grid */
+    .grid{
+      display:grid;
+      gap:18px;
+    }
+    .grid.two{ grid-template-columns: repeat(2, 1fr); }
+    .grid.three{ grid-template-columns: repeat(3, 1fr); }
+
+    .card{
+      background: rgba(255,255,255,.85);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding:20px;
+      box-shadow: 0 10px 30px rgba(20,20,20,.05);
+    }
+    .card h3{
+      margin:0 0 8px;
+      font-family:"Playfair Display", serif;
+      font-size:22px;
+    }
+    .card p{ margin:0; color:var(--muted); line-height:1.65; }
+    .card small{ color: var(--muted); }
+
+    /* Our story timeline */
+    .timeline{
+      display:grid;
+      gap:14px;
+      margin-top: 16px;
+    }
+    .moment{
+      display:flex;
+      gap:14px;
+      padding:14px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.78));
+    }
+    .dot{
+      width:12px; height:12px;
+      border-radius:999px;
+      background: var(--sage);
+      margin-top:6px;
+      flex: 0 0 auto;
+      box-shadow: 0 0 0 6px rgba(125,154,139,.12);
+    }
+    .moment h4{
+      margin:0 0 6px;
+      font-size:14px;
+      letter-spacing:.25px;
+      text-transform: uppercase;
+      color: rgba(43,43,43,.82);
+    }
+    .moment .meta{
+      margin:0 0 6px;
+      font-size:13px;
+      color: var(--muted);
+    }
+
+    /* Event details */
+    .details-row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .details-row .card{ height:100%; }
+    .details-row .addr{
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      font-size:14px;
+      color: rgba(43,43,43,.85);
+      line-height:1.6;
+    }
+    .map-embed{
+      border-radius: var(--radius);
+      overflow:hidden;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.85);
+      box-shadow: 0 10px 30px rgba(20,20,20,.05);
+      height: 100%;
+      min-height: 340px;
+    }
+    iframe{ width:100%; height:100%; border:0; }
+
+    /* Form */
+    form{
+      display:grid;
+      gap:12px;
+      margin-top: 8px;
+    }
+    label{
+      font-size:13px;
+      color: rgba(43,43,43,.85);
+      display:block;
+      margin-bottom:6px;
+    }
+    input, select, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border: 1px solid rgba(43,43,43,.14);
+      background: rgba(255,255,255,.92);
+      font: inherit;
+      outline:none;
+      transition: border .2s ease, box-shadow .2s ease;
+    }
+    textarea{ min-height: 96px; resize: vertical; }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(125,154,139,.55);
+      box-shadow: 0 0 0 4px rgba(125,154,139,.14);
+    }
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(125,154,139,.50);
+      background: rgba(125,154,139,.14);
+      color: rgba(43,43,43,.92);
+      font-weight:600;
+      cursor:pointer;
+      transition: transform .08s ease, background .2s ease;
+    }
+    .btn:hover{ background: rgba(125,154,139,.18); }
+    .btn:active{ transform: translateY(1px); }
+    .error{
+      font-size:12px;
+      color:#9b3a3a;
+      margin-top:-6px;
+    }
+    .success{
+      padding:14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(125,154,139,.40);
+      background: rgba(125,154,139,.12);
+      color: rgba(43,43,43,.90);
+      line-height:1.55;
+    }
+
+    /* Travel */
+    .hotel{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding:16px;
+      background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(231,239,233,.25));
+    }
+    .hotel strong{
+      font-family:"Playfair Display", serif;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+    .hotel span{ color:var(--muted); font-size:13px; line-height:1.55; }
+
+    /* Gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .photo{
+      position:relative;
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.85);
+      aspect-ratio: 4 / 3;
+    }
+    .photo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter: saturate(0.95) contrast(0.98);
+      transition: transform .35s ease;
+    }
+    .photo:hover img{ transform: scale(1.03); }
+    .photo::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,.10));
+      pointer-events:none;
+    }
+
+    /* Footer */
+    footer{
+      padding: 36px 0 54px;
+      border-top: 1px solid var(--line);
+      background: rgba(255,255,255,.35);
+    }
+    .footer-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .footer-inner strong{
+      font-family:"Playfair Display", serif;
+      font-size:16px;
+    }
+    .footer-inner span{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .hero-inner{ grid-template-columns: 1fr; }
+      .details-row{ grid-template-columns: 1fr; }
+      .grid.three{ grid-template-columns: 1fr; }
+      .grid.two{ grid-template-columns: 1fr; }
+      .gallery{ grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 520px){
+      nav ul{ gap:8px; }
+      nav a{ padding:7px 9px; }
+      .timer{ grid-template-columns: repeat(2, 1fr); }
+      .row{ grid-template-columns: 1fr; }
+      .gallery{ grid-template-columns: 1fr; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior:auto; }
+      .reveal{ transition:none; opacity:1; transform:none; }
+      .photo img{ transition:none; }
+      .btn{ transition:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="nav">
+        <div class="brand">
+          <strong>Emma &amp; James</strong>
+          <span>20 Sep 2025 • Sydney</span>
+        </div>
+        <nav aria-label="Primary">
+          <ul>
+            <li><a href="#story">Our Story</a></li>
+            <li><a href="#details">Event Details</a></li>
+            <li><a href="#rsvp" class="nav-cta">RSVP</a></li>
+            <li><a href="#travel">Travel</a></li>
+            <li><a href="#gallery">Photos</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-card reveal">
+        <div class="hero-inner">
+          <div>
+            <div class="date">
+              <span class="pill">Saturday, September 20, 2025</span>
+              <span class="pill rose">The Grounds of Alexandria • Sydney</span>
+            </div>
+            <h1>Emma &amp; James</h1>
+            <p>
+              We’re getting married — and we can’t wait to celebrate with you.
+              Join us for an afternoon ceremony followed by dinner, dancing, and all the good feelings.
+            </p>
+          </div>
+
+          <aside class="countdown" aria-label="Countdown timer">
+            <h3>Countdown</h3>
+            <div class="timer" id="timer" role="group" aria-label="Time until wedding">
+              <div class="tbox"><strong id="days">—</strong><span>Days</span></div>
+              <div class="tbox"><strong id="hours">—</strong><span>Hours</span></div>
+              <div class="tbox"><strong id="minutes">—</strong><span>Minutes</span></div>
+              <div class="tbox"><strong id="seconds">—</strong><span>Seconds</span></div>
+            </div>
+            <p class="timer-note" id="timerNote">
+              Counting down to Saturday, September 20, 2025.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Story -->
+  <section id="story">
+    <div class="container">
+      <div class="reveal">
+        <h2 class="section-title">Our Story</h2>
+        <p class="section-kicker">
+          A few highlights along the way — with placeholder dates (we’ll swap these for the real ones later).
+        </p>
+
+        <div class="grid two">
+          <div class="card">
+            <h3>Little timeline</h3>
+            <div class="timeline" aria-label="Our story timeline">
+              <div class="moment">
+                <div class="dot" aria-hidden="true"></div>
+                <div>
+                  <h4>We met</h4>
+                  <p class="meta">[Placeholder date: Month Day, Year]</p>
+                  <p>A chance meeting turned into a long conversation… and then a second one.</p>
+                </div>
+              </div>
+
+              <div class="moment">
+                <div class="dot" aria-hidden="true" style="background: var(--rose); box-shadow: 0 0 0 6px rgba(200,143,149,.12);"></div>
+                <div>
+                  <h4>First date</h4>
+                  <p class="meta">[Placeholder date: Month Day, Year]</p>
+                  <p>Coffee became dinner, dinner became a walk — and we both knew this was something special.</p>
+                </div>
+              </div>
+
+              <div class="moment">
+                <div class="dot" aria-hidden="true"></div>
+                <div>
+                  <h4>Engaged</h4>
+                  <p class="meta">[Placeholder date: Month Day, Year]</p>
+                  <p>A yes, a happy cry, and the start of planning the best day ever.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>What to expect</h3>
+            <p>
+              Dress comfortably elegant, arrive with plenty of time to mingle, and bring your best dance-floor energy.
+              We’ll have great food, warm toasts, and a few surprises.
+            </p>
+            <div style="margin-top:14px; display:flex; flex-wrap:wrap; gap:10px;">
+              <span class="pill">Ceremony • 3:00 PM</span>
+              <span class="pill rose">Reception • 5:30 PM</span>
+              <span class="pill">Sydney • The Grounds</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Event Details -->
+  <section id="details">
+    <div class="container">
+      <div class="reveal">
+        <h2 class="section-title">Event Details</h2>
+        <p class="section-kicker">
+          Saturday, September 20, 2025 at The Grounds of Alexandria. Ceremony begins at 3:00 PM, reception follows at 5:30 PM.
+        </p>
+
+        <div class="details-row">
+          <div class="grid two" style="gap:18px;">
+            <div class="card">
+              <h3>Ceremony</h3>
+              <p><strong>3:00 PM</strong> — Please arrive by 2:30 PM to find your seat.</p>
+              <div class="addr">
+                <strong>The Grounds of Alexandria</strong><br>
+                7A/2 Huntley St, Alexandria NSW 2015, Australia
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Reception</h3>
+              <p><strong>5:30 PM</strong> — Drinks, dinner, and dancing.</p>
+              <div class="addr">
+                <strong>The Grounds of Alexandria</strong><br>
+                7A/2 Huntley St, Alexandria NSW 2015, Australia
+              </div>
+            </div>
+          </div>
+
+          <div class="map-embed" aria-label="Google Map">
+            <!-- Embedded Google Maps (works as-is). You can swap this with a custom embed from Google Maps if you prefer. -->
+            <iframe
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=The%20Grounds%20of%20Alexandria%2C%207A%2F2%20Huntley%20St%2C%20Alexandria%20NSW%202015&output=embed"
+              title="Map to The Grounds of Alexandria">
+            </iframe>
+          </div>
+        </div>
+
+        <p class="section-kicker" style="margin-top:18px;">
+          Prefer opening in Maps? <a href="https://www.google.com/maps?q=The%20Grounds%20of%20Alexandria%2C%207A%2F2%20Huntley%20St%2C%20Alexandria%20NSW%202015" target="_blank" rel="noopener">Tap here</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section id="rsvp">
+    <div class="container">
+      <div class="reveal">
+        <h2 class="section-title">RSVP</h2>
+        <p class="section-kicker">
+          Please RSVP so we can finalise seating and menu choices. (This form is front-end only — wire it to your backend/email later.)
+        </p>
+
+        <div class="grid two">
+          <div class="card">
+            <h3>Your details</h3>
+
+            <div id="rsvpSuccess" class="success" style="display:none;" role="status" aria-live="polite"></div>
+
+            <form id="rsvpForm" novalidate>
+              <div>
+                <label for="guestName">Guest name</label>
+                <input id="guestName" name="guestName" type="text" autocomplete="name" required placeholder="e.g., Taylor Smith" />
+                <div class="error" id="errName" style="display:none;"></div>
+              </div>
+
+              <div>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required placeholder="e.g., taylor@email.com" />
+                <div class="error" id="errEmail" style="display:none;"></div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <label for="guests">Number of guests</label>
+                  <select id="guests" name="guests" required>
+                    <option value="">Select…</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                  </select>
+                  <div class="error" id="errGuests" style="display:none;"></div>
+                </div>
+
+                <div>
+                  <label for="diet">Dietary requirements</label>
+                  <select id="diet" name="diet" required>
+                    <option value="">Select…</option>
+                    <option value="none">None</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="gluten-free">Gluten-free</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <div class="error" id="errDiet" style="display:none;"></div>
+                </div>
+              </div>
+
+              <div id="dietOtherWrap" style="display:none;">
+                <label for="dietOther">If other, please specify</label>
+                <input id="dietOther" name="dietOther" type="text" placeholder="e.g., nut allergy" />
+                <div class="error" id="errDietOther" style="display:none;"></div>
+              </div>
+
+              <div>
+                <label for="song">Song request</label>
+                <input id="song" name="song" type="text" placeholder="What should we play?" />
+              </div>
+
+              <button class="btn" type="submit">Submit RSVP</button>
+              <small>We’ll send a confirmation email closer to the day (placeholder).</small>
+            </form>
+          </div>
+
+          <div class="card">
+            <h3>Helpful notes</h3>
+            <p>
+              If you have any questions about timing, accessibility, or special requests, reach out to Emma or James directly.
+              We’ll also share a final run sheet the week of the wedding.
+            </p>
+            <div style="margin-top:14px; padding:14px; border-radius:16px; border:1px solid var(--line); background: rgba(243,230,232,.26);">
+              <p style="margin:0; color: rgba(43,43,43,.88);">
+                <strong>Tip:</strong> RSVP early if you can — it helps a ton with seating and catering.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Travel -->
+  <section id="travel">
+    <div class="container">
+      <div class="reveal">
+        <h2 class="section-title">Travel &amp; Accommodation</h2>
+        <p class="section-kicker">
+          If you’re visiting from out of town, here are a few nearby options. (Recommendations are examples — swap for your preferred picks.)
+        </p>
+
+        <div class="grid three">
+          <div class="hotel">
+            <strong>Veriu Green Square</strong>
+            <span>Modern stays close to Alexandria with easy transit options.</span>
+            <span><em>Approx. 5–10 mins drive</em></span>
+          </div>
+
+          <div class="hotel">
+            <strong>Rydges Sydney Airport</strong>
+            <span>Convenient for travellers flying in, with comfortable rooms.</span>
+            <span><em>Approx. 10–15 mins drive</em></span>
+          </div>
+
+          <div class="hotel">
+            <strong>The Old Clare Hotel</strong>
+            <span>Boutique option in Chippendale with great dining nearby.</span>
+            <span><em>Approx. 15–20 mins drive</em></span>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:18px;">
+          <h3>Parking</h3>
+          <p>
+            Street parking can be limited. We recommend rideshare, public transport, or arriving early if you’re driving.
+            If you’re staying nearby, walking is a great option.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery">
+    <div class="container">
+      <div class="reveal">
+        <h2 class="section-title">Photo Gallery</h2>
+        <p class="section-kicker">
+          A few favourite moments (placeholders for now — swap these with your own photos).
+        </p>
+
+        <div class="gallery" aria-label="Photo gallery">
+          <div class="photo"><img alt="Placeholder photo 1" src="https://picsum.photos/seed/emmajames1/900/700"></div>
+          <div class="photo"><img alt="Placeholder photo 2" src="https://picsum.photos/seed/emmajames2/900/700"></div>
+          <div class="photo"><img alt="Placeholder photo 3" src="https://picsum.photos/seed/emmajames3/900/700"></div>
+          <div class="photo"><img alt="Placeholder photo 4" src="https://picsum.photos/seed/emmajames4/900/700"></div>
+          <div class="photo"><img alt="Placeholder photo 5" src="https://picsum.photos/seed/emmajames5/900/700"></div>
+          <div class="photo"><img alt="Placeholder photo 6" src="https://picsum.photos/seed/emmajames6/900/700"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <strong>Emma &amp; James</strong>
+        <span>See you there ✨</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---------------------------
+    // Countdown Timer
+    // ---------------------------
+    (function countdown(){
+      // Wedding: Saturday, September 20, 2025
+      // Set to 3:00 PM local time (Sydney) for a nicer “to the ceremony” countdown.
+      // Note: JS Date uses the user's local timezone; if you need exact AU/Sydney regardless of viewer,
+      // you'd handle timezone server-side or with a timezone library.
+      const weddingDate = new Date("2025-09-20T15:00:00");
+      const $days = document.getElementById("days");
+      const $hours = document.getElementById("hours");
+      const $minutes = document.getElementById("minutes");
+      const $seconds = document.getElementById("seconds");
+      const $note = document.getElementById("timerNote");
+
+      function pad(n){ return String(n).padStart(2, "0"); }
+
+      function tick(){
+        const now = new Date();
+        const diff = weddingDate - now;
+
+        if (diff <= 0){
+          $days.textContent = "0";
+          $hours.textContent = "00";
+          $minutes.textContent = "00";
+          $seconds.textContent = "00";
+          $note.textContent = "It’s wedding time! 💍";
+          return;
+        }
+
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / (3600 * 24));
+        const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        $days.textContent = String(days);
+        $hours.textContent = pad(hours);
+        $minutes.textContent = pad(minutes);
+        $seconds.textContent = pad(seconds);
+      }
+
+      tick();
+      setInterval(tick, 1000);
+    })();
+
+    // ---------------------------
+    // Scroll reveal animations
+    // ---------------------------
+    (function scrollReveal(){
+      const els = document.querySelectorAll(".reveal");
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries){
+          if (e.isIntersecting) e.target.classList.add("is-visible");
+        }
+      }, { threshold: 0.12 });
+
+      els.forEach(el => io.observe(el));
+    })();
+
+    // ---------------------------
+    // RSVP Form Validation
+    // ---------------------------
+    (function rsvp(){
+      const form = document.getElementById("rsvpForm");
+      const success = document.getElementById("rsvpSuccess");
+
+      const name = document.getElementById("guestName");
+      const email = document.getElementById("email");
+      const guests = document.getElementById("guests");
+      const diet = document.getElementById("diet");
+      const dietOtherWrap = document.getElementById("dietOtherWrap");
+      const dietOther = document.getElementById("dietOther");
+      const song = document.getElementById("song");
+
+      const errName = document.getElementById("errName");
+      const errEmail = document.getElementById("errEmail");
+      const errGuests = document.getElementById("errGuests");
+      const errDiet = document.getElementById("errDiet");
+      const errDietOther = document.getElementById("errDietOther");
+
+      function showError(el, msg){
+        el.textContent = msg;
+        el.style.display = "block";
+      }
+      function clearError(el){
+        el.textContent = "";
+        el.style.display = "none";
+      }
+      function isEmail(v){
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+      }
+
+      diet.addEventListener("change", () => {
+        if (diet.value === "other"){
+          dietOtherWrap.style.display = "block";
+        } else {
+          dietOtherWrap.style.display = "none";
+          dietOther.value = "";
+          clearError(errDietOther);
+        }
+      });
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // reset
+        [errName, errEmail, errGuests, errDiet, errDietOther].forEach(clearError);
+        success.style.display = "none";
+        success.textContent = "";
+
+        let ok = true;
+
+        if (!name.value.trim()){
+          showError(errName, "Please enter your name.");
+          ok = false;
+        }
+
+        if (!email.value.trim()){
+          showError(errEmail, "Please enter your email.");
+          ok = false;
+        } else if (!isEmail(email.value)){
+          showError(errEmail, "Please enter a valid email address.");
+          ok = false;
+        }
+
+        if (!guests.value){
+          showError(errGuests, "Please choose a number of guests.");
+          ok = false;
+        }
+
+        if (!diet.value){
+          showError(errDiet, "Please select a dietary option.");
+          ok = false;
+        }
+
+        if (diet.value === "other"){
+          if (!dietOther.value.trim()){
+            showError(errDietOther, "Please specify your dietary requirement.");
+            ok = false;
+          }
+        }
+
+        if (!ok) return;
+
+        // "Submit" (front-end only). Here you’d POST to your server or a form service.
+        const data = {
+          guestName: name.value.trim(),
+          email: email.value.trim(),
+          guests: guests.value,
+          diet: diet.value,
+          dietOther: dietOther.value.trim(),
+          song: song.value.trim()
+        };
+
+        // Confirmation message
+        const dietText = data.diet === "other" ? data.dietOther : data.diet;
+        success.innerHTML = `
+          <strong>Thank you, ${escapeHtml(data.guestName)}!</strong><br>
+          We’ve received your RSVP for <strong>${escapeHtml(data.guests)}</strong> guest(s).<br>
+          Dietary: <strong>${escapeHtml(dietText || "none")}</strong>${data.song ? `<br>Song request: <strong>${escapeHtml(data.song)}</strong>` : ""}
+        `;
+        success.style.display = "block";
+
+        // Clear form
+        form.reset();
+        dietOtherWrap.style.display = "none";
+        window.location.hash = "#rsvp";
+      });
+
+      function escapeHtml(str){
+        return String(str)
+          .replaceAll("&","&amp;")
+          .replaceAll("<","&lt;")
+          .replaceAll(">","&gt;")
+          .replaceAll('"',"&quot;")
+          .replaceAll("'","&#039;");
+      }
+    })();
+  </script>
+</body>
+</html>
